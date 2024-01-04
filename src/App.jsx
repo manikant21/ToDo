@@ -1,33 +1,33 @@
-import {usestate,useEffect} from 'react';
-import TodoForm from "./component/ToDoForm";
-import {ToDoContextProvider} from "./context";
+import {useState,useEffect} from 'react';
+import TodoForm from "./component/TodoForm";
+import {ToDoContextProvider} from "./context/ToDocontext";
 import  TodoItem  from './component/TodoItem';
 
 function App() {
-  const [todos,setTodos]=usestate([])
+  const [todos,setTodos]=useState([]);
   const addtodo=(todo)=>{
     setTodos((prev)=>[...prev,{id:Date.now(),...todo}]
-    )
-  }
+    );
+  };
   const deletetodo=(id)=>{
-    setTodos((prev)=>prev.filter((x)=>x.id!==id ))
-  }
+    setTodos((prev)=>prev.filter((x)=>x.id!==id ));
+  };
   const updatetodo=(id,todo)=>{
-    setTodos((prev)=>prev.map((x)=>(x.id===id ? todo:x)))
-  }
+    setTodos((prev)=>prev.map((x)=>(x.id===id ? todo:x)));
+  };
   const comp=(id)=>{
-    setTodos((prev)=>prev.map((x)=>(x.id===id ? {...x,completed:!x.completed}:x)))
-  }
+    setTodos((prev)=>prev.map((x)=>(x.id===id ? {...x,completed:!x.completed}:x)));
+  };
   useEffect(()=>{
-    const todos=JSON.parse(localStorage.getItem("todos"))
+    const todos=JSON.parse(localStorage.getItem("todos"));
     if(todos && todos.length>0){
-      setTodos(todos)
+      setTodos(todos);
     } 
 
-  },[])
+  },[]);
   useEffect(()=>{
-    localStorage.setItem("todos", JSON.stringify(todos))
-  },[todos])
+    localStorage.setItem("todos", JSON.stringify(todos));
+  },[todos]);
 
   return (
     <ToDoContextProvider value={{todos,addtodo,updatetodo,deletetodo,comp}}>

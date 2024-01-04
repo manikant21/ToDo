@@ -1,4 +1,4 @@
-/* eslint-disable no-unused-vars */
+
 import {createContext,useContext} from 'react';
 
 export const ToDoContext=createContext({
@@ -9,14 +9,14 @@ export const ToDoContext=createContext({
             completed:false,
         }
     ],
-    // eslint-disable-next-line no-unused-vars
+
     addtodo: (todo)=>{},
     updatetodo: (id,todo)=>{},
     deletetodo: (id)=>{},
     comp: (id)=>{}
 })
 
-export const ToDoContextProvider=ToDoContext.provider()
+export const ToDoContextProvider=ToDoContext.Provider
 
 export const useToDo=()=>{
     return useContext(ToDoContext)
